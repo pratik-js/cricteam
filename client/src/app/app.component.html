@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="py-3">
+      <nav mat-tab-nav-bar>
+        <a
+          mat-tab-link
+          *ngFor="let item of links"
+          [routerLink]="item.link"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [active]="rla.isActive"
+        >
+          {{ item.text }}
+        </a>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12"><router-outlet></router-outlet></div>
+  </div>
+</div>
