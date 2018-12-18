@@ -27,11 +27,9 @@ export class TeamComponent implements OnInit {
     this.list();
   }
 
-  list() {
+  async list() {
     this.dataList = null;
-    this.ts.list().subscribe(res => {
-      this.dataList = res;
-    });
+    this.dataList = await this.ts.list();
   }
 
   openEdit(teamData) {
@@ -43,7 +41,7 @@ export class TeamComponent implements OnInit {
   }
   openDialog(editData = null): void {
     const dialogRef = this.dialog.open(TeamAeComponent, {
-      width: '250px',
+      width: '300px',
       data: { editData }
     });
 
@@ -54,8 +52,8 @@ export class TeamComponent implements OnInit {
 
   uploadPhoto({ name, _id }): void {
     const dialogRef = this.dialog.open(UploadPhotoComponent, {
-      width: '250px',
-      data: { name, _id }
+      width: '400px',
+      data: { name, _id,for:'team' }
     });
 
     dialogRef.afterClosed().subscribe(result => {

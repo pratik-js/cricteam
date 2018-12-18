@@ -5,9 +5,9 @@
 {{ dataList | json}} -->
 <ng-template #dataComing><mat-spinner></mat-spinner></ng-template>
 
-<div *ngIf="dataList; else dataComing" class="d-flex">
-  <div *ngFor="let element of dataList" class="p-4">
-    <mat-card class="example-card" style="width:200px;">
+<div *ngIf="dataList; else dataComing" class="d-flex flex-wrap w-100">
+  <div *ngFor="let element of dataList" class="p-4 custom-card">
+    <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image">
           {{ element.teamId }}
@@ -19,9 +19,12 @@
       </mat-card-header>
       <img
         mat-card-image
-        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-        alt="Photo of a Shiba Inu"
+        class="team-card-img"
+        [src]="element.photoUrl"
+        alt="Team"
+        onerror="if (this.src != '/static/team-default.jpg') this.src = '/static/team-default.jpg';"
       />
+
       <mat-card-content> <p></p> </mat-card-content>
       <mat-card-actions>
         <button mat-button (click)="uploadPhoto(element)">Photo</button>

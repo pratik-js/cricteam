@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,6 +12,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TeamService {
+  private teamNames = null;
   constructor(private http: HttpClient) {}
 
   async insert(data) {
@@ -45,8 +45,26 @@ export class TeamService {
       console.error(err);
     }
   }
+  async list() {
+    return await this.http.get('/api/team').toPromise();
+  }
 
-  list(): Observable<any> {
-    return this.http.get('/api/team');
+  async intiTeamNames() {
+    if (this.teamNames) {
+      return this.teamNames;
+    }
+    this.teamNames = {};
+    this.teamNames['options'] = [];
+    const resData: any = await this.list();
+    for (let index = 0, teamId; index < resData.length; index++) {
+      teamId = parseInt(resData[index].teamId);
+      this.teamNames[teamId] = resData[index].name;
+      this.teamNames['options'].push({ vaule: teamId, text: resData[index].name });
+    }
+    return this.teamNames;
+  }
+
+  getTeamNames() {
+    return this.teamNames;
   }
 }

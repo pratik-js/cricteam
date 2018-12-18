@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { TeamService } from '../team/team.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -48,8 +49,8 @@ export class PlayerService {
     }
   }
 
-  list(): Observable<any> {
-    return this.http.get('/api/player');
+  async list() {
+    return await this.http.get('/api/player').toPromise();
   }
 
   async insertMany(dataList) {
@@ -70,25 +71,27 @@ export class PlayerService {
       { value: 3, text: 'Bowler' },
       { value: 4, text: 'Wicket Keeper' }
     ];
-    // ['All rounder', 'Batsman', 'Bowler', 'Wicket Keeper']
+  }
+  getPlayerTypeText() {
+    return ['All rounder', 'Batsman', 'Bowler', 'Wicket Keeper'];
   }
 
   initForm({
     name = '',
     playerTypeId = 1,
+    teamId = 0,
     isNew = false,
     point = 0,
     sold = false,
     isCaptain = false,
     isActive = true,
-    match = null,
-    runs = null,
-    wickets = null,
-    catches = null
+    records = null
   }) {
+    const { match = 0, runs = 0, wickets = 0, catches = 0 } = records || {};
     return new FormGroup({
       name: new FormControl(name, Validators.required),
       playerTypeId: new FormControl(playerTypeId),
+      teamId: new FormControl(teamId),
       isNew: new FormControl(isNew),
       point: new FormControl(point),
       sold: new FormControl(sold),

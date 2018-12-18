@@ -2,7 +2,11 @@ const { ObjectID } = require('mongodb');
 const { getCollection } = require('./connect');
 
 const mdbHelper = {
-  list: async (collectionName, { filter = {}, page = 0, limit = 10 }, res) => {
+  list: async (
+    collectionName,
+    { filter = {}, page = 0, limit = 10 },
+    res = null
+  ) => {
     const collection = getCollection(collectionName);
     try {
       const dbRes = await collection
@@ -15,7 +19,7 @@ const mdbHelper = {
       console.error(err.stack);
     }
   },
-  insert: async (collectionName, data, res) => {
+  insert: async (collectionName, data, res = null) => {
     const collection = getCollection(collectionName);
     try {
       // Insert a single document
@@ -25,7 +29,7 @@ const mdbHelper = {
       console.error(err.stack);
     }
   },
-  insertMany: async (collectionName, dataList, res) => {
+  insertMany: async (collectionName, dataList, res = null) => {
     const collection = getCollection(collectionName);
     try {
       // Insert multiple documents
@@ -35,7 +39,7 @@ const mdbHelper = {
       console.error(err.stack);
     }
   },
-  update: async (collectionName, id, patchData, res) => {
+  update: async (collectionName, id, patchData, res = null) => {
     const collection = getCollection(collectionName);
     try {
       const dbRes = await collection.updateOne(
@@ -43,11 +47,12 @@ const mdbHelper = {
         { $set: patchData }
       ); // {a:1}, {$set: {b: 1}}
       sendResponse(res, { updated: dbRes.modifiedCount });
+      return dbRes.modifiedCount;
     } catch (err) {
       console.error(err.stack);
     }
   },
-  getById: async (collectionName, id, res) => {
+  getById: async (collectionName, id, res = null) => {
     try {
       const collection = getCollection(collectionName);
       const dbRes = await collection.findOne({ _id: get_id(id) });
@@ -56,7 +61,7 @@ const mdbHelper = {
       console.error(err.stack);
     }
   },
-  deleteById: async (collectionName, id, res) => {
+  deleteById: async (collectionName, id, res = null) => {
     const collection = getCollection(collectionName);
     try {
       const dbRes = await collection.deleteOne({ _id: get_id(id) });

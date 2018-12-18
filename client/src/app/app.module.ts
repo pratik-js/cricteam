@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialInUseModule } from './material-in-use/material-in-use.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TeamResolverService } from './pages/team/team-resolver.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,7 @@ import { environment } from '../environments/environment';
       enabled: environment.production
     })
   ],
-  providers: [],
+  providers: [TeamResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

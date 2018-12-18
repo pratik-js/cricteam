@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlayerService } from '../player.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { TeamService } from '../../team/team.service';
 
 @Component({
   selector: 'app-player-ae',
@@ -12,31 +13,28 @@ export class PlayerAeComponent implements OnInit {
   playerForm;
   title;
   buttonTitle;
+  playerTypes;
+  teamNames;
+
   constructor(
     private ps: PlayerService,
     public dialogRef: MatDialogRef<PlayerAeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data
-  ) {
-    if (data.editData) {
+    @Inject(MAT_DIALOG_DATA) public data,
+    private ts: TeamService
+  ) {}
+
+  ngOnInit() {
+    this.teamNames = this.ts.getTeamNames();
+    this.playerTypes = this.ps.getPlayerTypes();
+    if (this.data.editData) {
       this.buttonTitle = 'Update';
       this.title = 'Edit';
-      const { name, price, quantity } = data.editData;
-      this.initForm(name, price, quantity);
+      this.playerForm = this.ps.initForm(this.data.editData);
     } else {
-      this.initForm();
+      this.playerForm = this.ps.initForm({});
       this.buttonTitle = 'Add';
       this.title = 'Add New';
     }
-  }
-
-  ngOnInit() {}
-
-  initForm(name = '', price = null, quantity = null) {
-    this.playerForm = new FormGroup({
-      name: new FormControl(name, Validators.required),
-      price: new FormControl(price),
-      quantity: new FormControl(quantity)
-    });
   }
 
   onNoClick(): void {
@@ -44,15 +42,19 @@ export class PlayerAeComponent implements OnInit {
   }
 
   async onSubmit() {
+    const data = this.playerForm.value;
+    if (data.isNew) {
+      data.records = null;
+    }
+    if (data.point > 0) {
+      data.sold = true;
+    }
     if (this.data.editData) {
-      const data = await this.ps.update(
-        this.data.editData._id,
-        this.playerForm.value
-      );
-      data && this.dialogRef.close(true);
+      const resData = await this.ps.update(this.data.editData._id, data);
+      resData && this.dialogRef.close(true);
     } else {
-      const data = await this.ps.insert(this.playerForm.value);
-      this.dialogRef.close(true);
+      const resData = await this.ps.insert(data);
+      resData && this.dialogRef.close(true);
     }
   }
 }

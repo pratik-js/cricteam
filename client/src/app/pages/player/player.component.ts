@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from './player.service';
 import { MatDialog } from '@angular/material';
 import { PlayerAeComponent } from './player-ae/player-ae.component';
+import { UploadPhotoComponent } from '../upload-photo/upload-photo.component';
+import { TeamService } from '../team/team.service';
 
 @Component({
   selector: 'app-player',
@@ -10,27 +12,38 @@ import { PlayerAeComponent } from './player-ae/player-ae.component';
 })
 export class PlayerComponent implements OnInit {
   dataList: any;
+  playerTypesText;
+  teamNames;
 
   displayedColumns: string[] = [
+    'photo',
     'name',
-    'price',
-    'quantity',
-    '_id',
+    'playerType',
+    'records',
+    'point',
+    'team',
+    'sold',
     'edit',
     'delete'
   ];
 
-  constructor(private ps: PlayerService, public dialog: MatDialog) {}
+  constructor(
+    private ps: PlayerService,
+    private ts: TeamService,
+    public dialog: MatDialog
+  ) {
+    this.playerTypesText = ps.getPlayerTypeText();
+    console.log('player');
+    this.teamNames = this.ts.getTeamNames();
+  }
 
   ngOnInit() {
     this.list();
   }
 
-  list() {
+  async list() {
     this.dataList = null;
-    this.ps.list().subscribe(res => {
-      this.dataList = res;
-    });
+    this.dataList = await this.ps.list();
   }
 
   openEdit(playerData) {
@@ -42,8 +55,19 @@ export class PlayerComponent implements OnInit {
   }
   openDialog(editData = null): void {
     const dialogRef = this.dialog.open(PlayerAeComponent, {
-      width: '250px',
+      width: '500px',
       data: { editData }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      result === true && this.list();
+    });
+  }
+
+  uploadPhoto({ name, _id }): void {
+    const dialogRef = this.dialog.open(UploadPhotoComponent, {
+      width: '400px',
+      data: { name, _id, for: 'player' }
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -14,7 +14,9 @@ import {
   MatDialogModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatCardModule
+  MatCardModule,
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS
 } from '@angular/material';
 
 const MaterialModules = [
@@ -32,11 +34,22 @@ const MaterialModules = [
   MatDialogModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatCardModule
+  MatCardModule,
+  MatSnackBarModule
 ];
 @NgModule({
   declarations: [],
   imports: [MaterialModules],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 4000,
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar']
+      }
+    }
+  ],
   exports: [MaterialModules]
 })
 export class MaterialInUseModule {}

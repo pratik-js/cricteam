@@ -5,46 +5,99 @@
 {{ dataList | json}} -->
 <ng-template #dataComing><mat-spinner></mat-spinner></ng-template>
 
-<div *ngIf="dataList; else dataComing">
-  <table mat-table [dataSource]="dataList" class="mat-elevation-z8">
+<div *ngIf="dataList; else dataComing" class="m-2">
+  <table mat-table [dataSource]="dataList" class="mat-elevation-z8 p-4">
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="_id">
-      <th mat-header-cell *matHeaderCellDef>Id.</th>
-      <td mat-cell *matCellDef="let element">{{ element._id }}</td>
+    <!-- Img Column -->
+    <ng-container matColumnDef="photo">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <img
+          (click)="uploadPhoto(element)"
+          mat-card-image
+          class="palayer-table-img"
+          [src]="element.photoUrl"
+          alt="Team"
+          onerror="if (this.src != '/static/team-default.jpg') this.src = '/static/team-default.jpg';"
+        />
+      </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name.</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="{
+          'new-player': element.isNew,
+          'is-captain': element.isCaptain
+        }"
+      >
+        <b class="m-3">{{ element.name }}</b>
+      </td>
     </ng-container>
 
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef>Price.</th>
-      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    <!-- type Column -->
+    <ng-container matColumnDef="playerType">
+      <th mat-header-cell *matHeaderCellDef>Type.</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="p-2">{{ playerTypesText[element.playerTypeId] }}</span>
+      </td>
     </ng-container>
 
-    <!-- Quantity Column -->
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef>Quantity.</th>
-      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+    <!-- Records Column -->
+    <ng-container matColumnDef="records">
+      <th mat-header-cell *matHeaderCellDef>Records.</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="d-flex flex-wrap record-td" *ngIf="element.records">
+          <div class="w-50">Match: {{ element.records.match }}</div>
+          <div class="w-50">Catches: {{ element.records.catches }}</div>
+          <div class="w-50">Runs: {{ element.records.runs }}</div>
+          <div class="w-50">Wickets: {{ element.records.wickets }}</div>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Point Column -->
+    <ng-container matColumnDef="point">
+      <th mat-header-cell *matHeaderCellDef>Point.</th>
+      <td mat-cell *matCellDef="let element">{{ element.point }}</td>
+    </ng-container>
+    <!-- team Column -->
+    <ng-container matColumnDef="team">
+      <th mat-header-cell *matHeaderCellDef>Team.</th>
+      <td mat-cell *matCellDef="let element">
+        {{ teamNames[element.teamId] }}
+      </td>
+    </ng-container>
+
+    <!-- sold Column -->
+    <ng-container matColumnDef="sold">
+      <th mat-header-cell *matHeaderCellDef>Sold.</th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        class="px-2"
+        [ngClass]="{ 'sold-td': element.sold }"
+      ></td>
     </ng-container>
 
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef>Edit</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon class="pointer" (click)="openEdit(element)">edit</mat-icon>
+        <mat-icon class="pointer p-1" (click)="openEdit(element)"
+          >edit</mat-icon
+        >
       </td>
     </ng-container>
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef>Delete</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon class="pointer" (click)="deleteById(element._id)"
+        <mat-icon class="pointer p-1" (click)="deleteById(element._id)"
           >delete</mat-icon
         >
       </td>

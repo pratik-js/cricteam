@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>{{ title }}</h1>
-<div mat-dialog-content style="width:300px;">
-  <h2>{{ name }}</h2>
-  <input placeholder="photo" type="file" id="input-photo" /> : Photo
+<div mat-dialog-content>
+  <h6>{{ name }}</h6>
+  <input placeholder="photo" type="file" accept="image/*" id="input-photo" />
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="primary" type="button" (click)="onSubmit()">
