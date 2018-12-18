@@ -1,5 +1,7 @@
 const express = require('express');
 const player = require('./player');
+const team = require('./team');
+const uploadPhoto = require('./upload/photo');
 const getSchema = require('./getSchema');
 const apiRoutes = express.Router();
 const rotuer = express.Router();
@@ -8,6 +10,8 @@ rotuer.use('/schema', getSchema);
 rotuer.use('/api', apiRoutes);
 
 apiRoutes.use(player);
+apiRoutes.use(team);
+apiRoutes.use(uploadPhoto);
 
 apiRoutes.use(function(req, res, next) {
   var err = new Error('Not Found(:<:<:<:<:<)');

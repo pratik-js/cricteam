@@ -14,7 +14,7 @@ import {
   MatDialogModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatDividerModule
+  MatCardModule
 } from '@angular/material';
 
 const MaterialModules = [
@@ -32,7 +32,7 @@ const MaterialModules = [
   MatDialogModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatDividerModule
+  MatCardModule
 ];
 @NgModule({
   declarations: [],

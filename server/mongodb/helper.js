@@ -65,6 +65,23 @@ const mdbHelper = {
     } catch (err) {
       console.error(err.stack);
     }
+  },
+  getCounter: async counterName => {
+    const counterDetail = {};
+    counterDetail[counterName] = 1;
+    try {
+      const collection = getCollection('counter');
+      const dbRes = await collection.findOneAndUpdate(
+        {},
+        {
+          $inc: counterDetail
+        },
+        { upsert: true, returnOriginal: false }
+      );
+      return dbRes.value[counterName];
+    } catch (err) {
+      console.error(err.stack);
+    }
   }
 };
 

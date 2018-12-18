@@ -368,13 +368,13 @@ MIT
 
 @angular/material/table
 
+@angular/material/card
+
 @angular/material/core
 
 @angular/material/select
 
 @angular/material/slide-toggle
-
-@angular/material/divider
 
 @angular/material/tabs
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlayerService } from '../player.service';
 
 @Component({
@@ -18,39 +17,18 @@ export class PlayerBulkComponent implements OnInit {
   ngOnInit() {}
 
   generateForms() {
-    const numberOfForm = parseInt(
-      document.getElementById('number-of-player')['value']
+    const numberOfForm = Number.parseInt(
+      document.getElementById('number-of-player')['value'],
+      10
     );
     if (!numberOfForm) {
       return;
     }
     const forms = [];
     for (let index = 0; index < numberOfForm; index++) {
-      forms.push(this.initForm({}));
+      forms.push(this.ps.initForm({}));
     }
     this.playerForms = forms;
-  }
-
-  initForm({
-    name = '',
-    playerTypeId = 1,
-    isNew = false,
-    match = null,
-    runs = null,
-    wickets = null,
-    catches = null
-  }) {
-    return new FormGroup({
-      name: new FormControl(name, Validators.required),
-      playerTypeId: new FormControl(playerTypeId),
-      isNew: new FormControl(isNew),
-      records: new FormGroup({
-        match: new FormControl(match),
-        runs: new FormControl(runs),
-        wickets: new FormControl(wickets),
-        catches: new FormControl(catches)
-      })
-    });
   }
 
   async onSubmit() {
@@ -63,6 +41,6 @@ export class PlayerBulkComponent implements OnInit {
       dataList.push(data);
     }
     console.log(dataList);
-    // const data = await this.ps.insert(dataList);
+    const resData = await this.ps.insertMany(dataList);
   }
 }

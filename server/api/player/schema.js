@@ -27,7 +27,7 @@ const schema = {
     },
     teamId: {
       description: 'Team Id',
-      type: 'string'
+      type: 'integer'
     },
     point: {
       description: 'point',
@@ -46,7 +46,15 @@ const schema = {
       type: 'boolean'
     }
   },
-  required: ['name', 'playerType', 'record', 'point', 'sold', 'isCaptain'],
+  required: [
+    'name',
+    'playerTypeId',
+    'records',
+    'point',
+    'sold',
+    'isCaptain',
+    'isNew'
+  ],
   errorMessages: {}
 };
 

@@ -11,6 +11,7 @@ import { TeamComponent } from './team/team.component';
 import { TeamAeComponent } from './team/team-ae/team-ae.component';
 import { TeamService } from './team/team.service';
 import { PlayerBulkComponent } from './player/player-bulk/player-bulk.component';
+import { UploadPhotoComponent } from './upload-photo/upload-photo.component';
 
 const PAGES = [
   PlayerComponent,
@@ -20,8 +21,13 @@ const PAGES = [
 ];
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, MaterialInUseModule],
-  declarations: [PAGES, PlayerAeComponent, TeamAeComponent],
-  entryComponents: [PlayerAeComponent, TeamAeComponent],
+  declarations: [
+    PAGES,
+    PlayerAeComponent,
+    TeamAeComponent,
+    UploadPhotoComponent
+  ],
+  entryComponents: [PlayerAeComponent, TeamAeComponent, UploadPhotoComponent],
   providers: [PlayerService, TeamService],
   exports: [PAGES]
 })

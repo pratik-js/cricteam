@@ -9,8 +9,6 @@ import { PlayerAeComponent } from './player-ae/player-ae.component';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  dialogTitle;
-  dataInfo: any;
   dataList: any;
 
   displayedColumns: string[] = [
@@ -30,9 +28,7 @@ export class PlayerComponent implements OnInit {
 
   list() {
     this.dataList = null;
-    this.dataInfo = {};
     this.ps.list().subscribe(res => {
-      this.dataInfo.totalRecord = 50;
       this.dataList = res;
     });
   }

@@ -10,7 +10,7 @@ router.post('/player-bulk', (req, res) => {
   const totalPlayer = players.length;
   const validatedDataList = [];
   for (let i = 0, playerData; i < totalPlayer; i++) {
-    playerData = dataHelper.readNewData(entityName, req.body, res);
+    playerData = dataHelper.readNewData(entityName, players[i], res);
     playerData && validatedDataList.push(playerData);
   }
   if (validatedDataList.length !== totalPlayer) {
