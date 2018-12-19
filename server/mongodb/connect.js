@@ -7,7 +7,7 @@ let mdbObj;
 
 async function initMongoDB(entityName) {
   const url = process.env.MONGODB_URI;
-  const dbName = 'ecom';
+  const dbName = process.env.DB_NAME;
   const client = new MongoClient(url, { useNewUrlParser: true });
   try {
     if (!client.isConnected()) {
