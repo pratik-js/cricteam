@@ -13,17 +13,16 @@ const resolve = {
 const admin = [
   {
     path: 'player',
-    component: PlayerComponent,
-    resolve
+    component: PlayerComponent
   },
-  { path: 'team', component: TeamComponent, resolve },
-  { path: 'playerBulk', component: PlayerBulkComponent }
+  { path: 'team', component: TeamComponent },
+  { path: 'playerBulk', component: PlayerBulkComponent },
+  { path: '', component: PlayerComponent }
 ];
 
 const routes: Routes = [
-  ...admin,
-  { path: 'admin', children: admin },
-  { path: '', pathMatch: 'full', redirectTo: '/player' },
+  { path: 'admin', resolve, children: admin },
+  { path: '', pathMatch: 'full', redirectTo: '/admin' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

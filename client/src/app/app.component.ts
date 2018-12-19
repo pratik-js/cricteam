@@ -7,8 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   links = [
-    { link: 'player', text: 'Player' },
-    { link: 'team', text: 'Team' },
-    { link: 'playerBulk', text: 'Add Players' }
+    { link: '/admin/player', text: 'Player' },
+    { link: '/admin/team', text: 'Team' },
+    { link: '/admin/playerBulk', text: 'Add Players' }
   ];
 }
