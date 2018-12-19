@@ -6,4 +6,4 @@ Temporarily ignore changes
 git update-index --assume-unchanged server/local.env
 
 Resume tracking files with:
-git update-index --assume-unchanged server/local.env
+git update-index --no-assume-unchanged server/local.env
