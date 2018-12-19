@@ -1,0 +1,13 @@
+@import './scss/variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+@import './scss/material';
+
+.pointer {
+  cursor: pointer;
+}
+
+.custom-snackbar {
+  background-color: whitesmoke;
+  color: gray;
+}

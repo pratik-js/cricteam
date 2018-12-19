@@ -1,0 +1,36 @@
+<button mat-raised-button color="primary" (click)="openDialog()">
+  <mat-icon>add</mat-icon><span>Add</span>
+</button>
+<!--
+{{ dataList | json}} -->
+<ng-template #dataComing><mat-spinner></mat-spinner></ng-template>
+
+<div *ngIf="dataList; else dataComing" class="d-flex flex-wrap w-100">
+  <div *ngFor="let element of dataList" class="p-4 custom-card">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+          {{ element.teamId }}
+        </div>
+        <mat-card-title>{{ element.name }}</mat-card-title>
+        <mat-card-subtitle>{{
+          element.totalPoints + ' Points'
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <img
+        mat-card-image
+        class="team-card-img"
+        [src]="element.photoUrl"
+        alt="Team"
+        onerror="if (this.src != '/static/team-default.jpg') this.src = '/static/team-default.jpg';"
+      />
+
+      <mat-card-content> <p></p> </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="uploadPhoto(element)">Photo</button>
+        <button mat-button (click)="openEdit(element)">Edit</button>
+        <button mat-button (click)="deleteById(element._id)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

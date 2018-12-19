@@ -1,0 +1,95 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="playerForm" class="d-flex">
+    <div class="d-flex w-100">
+      <div class="m-2 w-50">
+        <mat-form-field>
+          <input matInput placeholder="Name*" formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Player Type" formControlName="playerTypeId">
+            <mat-option *ngFor="let item of playerTypes" [value]="item.value">
+              {{ item.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Team" formControlName="teamId">
+            <mat-option
+              *ngFor="let item of teamNames.options"
+              [value]="item.id"
+            >
+              {{ item.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Point"
+            formControlName="point"
+            type="number"
+          />
+        </mat-form-field>
+        <div>
+          <mat-slide-toggle formControlName="sold">Sold</mat-slide-toggle>
+        </div>
+        <mat-slide-toggle formControlName="isNew">New Player</mat-slide-toggle>
+        <mat-slide-toggle formControlName="isCaptain">Captain</mat-slide-toggle>
+      </div>
+      <div class="m-2 w-50">
+        <div
+          formGroupName="records"
+          [ngClass]="{ 'd-none': playerForm.value.isNew }"
+        >
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Match"
+              formControlName="match"
+              type="number"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Runs"
+              formControlName="runs"
+              type="number"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Wickets"
+              formControlName="wickets"
+              type="number"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Catches"
+              formControlName="catches"
+              type="number"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    [disabled]="!playerForm.valid"
+    (click)="onSubmit()"
+  >
+    {{ buttonTitle }}
+  </button>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>
