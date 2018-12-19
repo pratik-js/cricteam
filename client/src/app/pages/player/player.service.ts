@@ -78,7 +78,7 @@ export class PlayerService {
     name = '',
     playerTypeId = 1,
     teamId = 0,
-    isNew = false,
+    isNew = true,
     point = 0,
     sold = false,
     isCaptain = false,
