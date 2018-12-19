@@ -38,7 +38,7 @@ router.patch('/player/:id', (req, res) => {
 
 router.get('/player', (req, res) => {
   let filter, page, limit;
-  mdbHelper.list(entityName, { filter, page, limit }, res);
+  mdbHelper.list(entityName, { filter, page, limit, sort: 'name' }, res);
 });
 
 router.get('/player/:id', (req, res) => {

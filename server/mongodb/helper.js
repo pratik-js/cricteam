@@ -4,16 +4,17 @@ const { getCollection } = require('./connect');
 const mdbHelper = {
   list: async (
     collectionName,
-    { filter = {}, page = 0, limit = 10 },
+    { filter = {}, page = 0, limit = 10, sort = 'name' },
     res = null
   ) => {
     const collection = getCollection(collectionName);
+    const sortField = {};
+    sortField[sort] = 1;
     try {
       const dbRes = await collection
         .find(filter)
-        .limit(limit)
+        .sort(sortField)
         .toArray();
-
       sendResponse(res, dbRes);
     } catch (err) {
       console.error(err.stack);

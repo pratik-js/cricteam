@@ -57,10 +57,14 @@ export class TeamService {
     this.teamNames['options'] = [];
     const resData: any = await this.list();
     for (let index = 0, teamId; index < resData.length; index++) {
-      teamId = parseInt(resData[index].teamId);
+      teamId = resData[index].teamId;
       this.teamNames[teamId] = resData[index].name;
-      this.teamNames['options'].push({ vaule: teamId, text: resData[index].name });
+      this.teamNames['options'].push({
+        id: teamId,
+        text: resData[index].name
+      });
     }
+
     return this.teamNames;
   }
 

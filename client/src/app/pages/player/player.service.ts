@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { TeamService } from '../team/team.service';
 
 const httpOptions = {
   headers: new HttpHeaders({

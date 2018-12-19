@@ -22,7 +22,7 @@ router.patch('/team/:id', (req, res) => {
 
 router.get('/team', (req, res) => {
   let filter, page, limit;
-  mdbHelper.list(entityName, { filter, page, limit }, res);
+  mdbHelper.list(entityName, { filter, page, limit, sort: 'teamId' }, res);
 });
 
 router.get('/team/:id', (req, res) => {

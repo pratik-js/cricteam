@@ -53,7 +53,7 @@ export class TeamComponent implements OnInit {
   uploadPhoto({ name, _id }): void {
     const dialogRef = this.dialog.open(UploadPhotoComponent, {
       width: '400px',
-      data: { name, _id,for:'team' }
+      data: { name, _id, for: 'team' }
     });
 
     dialogRef.afterClosed().subscribe(result => {

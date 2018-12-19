@@ -41,8 +41,8 @@ const ip = process.env.IP || 'localhost';
 createFoler('./public/photo');
 createFoler('./public/photo/team');
 createFoler('./public/photo/player');
-function createFoler(folderPath){
-  folderPath= path.resolve(folderPath);
+function createFoler(folderPath) {
+  folderPath = path.resolve(folderPath);
   if (!fs.existsSync(folderPath)) {
     fs.mkdirSync(folderPath);
   }

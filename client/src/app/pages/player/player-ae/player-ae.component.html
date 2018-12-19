@@ -17,7 +17,10 @@
 
         <mat-form-field>
           <mat-select placeholder="Team" formControlName="teamId">
-            <mat-option *ngFor="let item of teamNames.options" [value]="item.value">
+            <mat-option
+              *ngFor="let item of teamNames.options"
+              [value]="item.id"
+            >
               {{ item.text }}
             </mat-option>
           </mat-select>
@@ -30,7 +33,9 @@
             type="number"
           />
         </mat-form-field>
-        <div><mat-slide-toggle formControlName="sold">Sold</mat-slide-toggle></div>
+        <div>
+          <mat-slide-toggle formControlName="sold">Sold</mat-slide-toggle>
+        </div>
         <mat-slide-toggle formControlName="isNew">New Player</mat-slide-toggle>
         <mat-slide-toggle formControlName="isCaptain">Captain</mat-slide-toggle>
       </div>
