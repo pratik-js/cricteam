@@ -32,8 +32,8 @@ export class PlayerComponent implements OnInit {
     private ts: TeamService,
     public dialog: MatDialog
   ) {
-    this.playerTypesText = ps.getPlayerTypeText();
     console.log('player');
+    this.playerTypesText = ps.getPlayerTypeText();
     this.teamNames = this.ts.getTeamNames();
   }
 

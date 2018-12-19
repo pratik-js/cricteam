@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../player.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-player-bulk',
@@ -10,7 +11,7 @@ export class PlayerBulkComponent implements OnInit {
   playerForms: any;
   playerTypes;
 
-  constructor(private ps: PlayerService) {
+  constructor(private ps: PlayerService, private router: Router) {
     this.playerTypes = ps.getPlayerTypes();
   }
 
@@ -41,6 +42,9 @@ export class PlayerBulkComponent implements OnInit {
       dataList.push(data);
     }
     console.log(dataList);
-    const resData = await this.ps.insertMany(dataList);
+    const resData: any = await this.ps.insertMany(dataList);
+    if (resData.inserted) {
+      this.router.navigateByUrl('/admin/player');
+    }
   }
 }

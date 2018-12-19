@@ -12,6 +12,7 @@ export class TeamResolverService implements Resolve<any> {
     return new Promise(async (resolve, reject) => {
       await this.ts.intiTeamNames();
       resolve(true);
+      console.log('data resolved');
     });
   }
 }
