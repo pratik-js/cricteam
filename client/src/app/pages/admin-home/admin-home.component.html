@@ -1,0 +1,92 @@
+<div class="container-fliud">
+  <div class="row wrapper">
+    <div class="col-12">
+      <div class="d-flex align-items-start flex-column h-100">
+        <div class="p-2">
+          <div *ngIf="teamList; else dataComing" class="d-flex w-100">
+            <div *ngFor="let teamData of teamList" class="p-1 flex-fill">
+              <app-team-card
+                [element]="teamData"
+                [teamPoints]="teamPoints"
+                [currentTeamId]="currentTeamId"
+              ></app-team-card>
+              <button
+                mat-fab
+                color="primary"
+                class="m-1"
+                (click)="addPoint(teamData.teamId, 10)"
+              >
+                10
+              </button>
+              <button
+                mat-fab
+                color="primary"
+                class="m-1"
+                (click)="addPoint(teamData.teamId, 20)"
+              >
+                20
+              </button>
+              <button
+                mat-fab
+                color="primary"
+                class="m-1"
+                (click)="addPoint(teamData.teamId, 50)"
+              >
+                50
+              </button>
+              <button
+                mat-fab
+                color="accent"
+                class="m-1"
+                (click)="addPoint(teamData.teamId, 100)"
+              >
+                100
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mb-auto p-2 w-100">
+          <div class="d-flex" *ngIf="currentPlayer; else dataComing">
+            <form [formGroup]="playerForm" class="d-flex w-100">
+              <div class="" style="width: 250px;">
+                <app-player-card [element]="currentPlayer"></app-player-card>
+              </div>
+              <div class="flex-fill">
+                <div class="d-flex justify-content-center">
+                  <div class="current-point m-4">
+                    <input matInput formControlName="point" type="number" />
+                  </div>
+                  <div class="current-team m-4">
+                    <div class="d-flex">
+                      <div style="width: 200px;" class="mt-4">
+                        <mat-select placeholder="Team" formControlName="teamId">
+                          <mat-option
+                            *ngFor="let item of teamNames.options"
+                            [value]="item.id"
+                          >
+                            {{ item.text }}
+                          </mat-option>
+                        </mat-select>
+                      </div>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        class="ml-4 mt-4"
+                        style="font-size: 25px;"
+                        (click)="onSubmit()"
+                      >
+                        Lock The Deal
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dataComing><mat-spinner></mat-spinner></ng-template>

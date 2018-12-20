@@ -51,6 +51,20 @@ export class PlayerService {
     return await this.http.get('/api/player').toPromise();
   }
 
+  async getByType(id) {
+    return await this.http.get('/api/player-by-type/' + id).toPromise();
+  }
+
+  async getPlayerById(id) {
+    const data = await this.http.get('/api/player/' + id).toPromise();
+    return data;
+  }
+
+  async getPointForTeam() {
+    const data = await this.http.get('/api/player').toPromise();
+    return this.sumUpPoint(data);
+  }
+
   async insertMany(dataList) {
     try {
       const res = await this.http
@@ -102,5 +116,21 @@ export class PlayerService {
         catches: new FormControl(catches)
       })
     });
+  }
+
+  sumUpPoint(data) {
+    const teamPoints = {};
+    let teamId = 0;
+    let point = 0;
+    data.forEach(({ teamId, point }) => {
+      if (teamId && point) {
+        if (teamPoints[teamId]) {
+          teamPoints[teamId] += point;
+        } else {
+          teamPoints[teamId] = point;
+        }
+      }
+    });
+    return teamPoints;
   }
 }

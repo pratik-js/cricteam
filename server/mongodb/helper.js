@@ -88,6 +88,19 @@ const mdbHelper = {
     } catch (err) {
       console.error(err.stack);
     }
+  },
+  getGroupby: async (collectionName, res = null) => {
+    try {
+      const collection = getCollection(collectionName);
+      const dbRes = await collection.aggregate([
+        { $group: { "_id": "$teamId", averageQuantity: { $sum: "$point" } } }
+      ]);
+      console.log(dbRes);
+      sendResponse(res, { dbRes });
+    } catch (err) {
+      res.send({ a: err.stack });
+      // console.error(err.stack);
+    }
   }
 };
 

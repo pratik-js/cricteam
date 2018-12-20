@@ -1,0 +1,31 @@
+<mat-card
+  class="example-card"
+  [ngClass]="{ 'current-team': element.teamId === currentTeamId }"
+>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image">{{ element.teamId }}</div>
+    <mat-card-title>{{ element.name }}</mat-card-title>
+  </mat-card-header>
+  <img
+    mat-card-image
+    class="team-card-img"
+    [src]="element.photoUrl"
+    alt="Team"
+    onerror="if (this.src != '/static/team-default.jpg') this.src = '/static/team-default.jpg';"
+  />
+  <mat-card-content>
+    <div class="w-100 text-center"><b>Points</b></div>
+    <div class="d-flex flex-wrap all-point">
+      <div class="w-50 pr-2 total-point">{{ element.totalPoints }}</div>
+      <div class="w-50"><b>Total</b></div>
+      <div class="w-50 pr-2 used-point">
+        {{ teamPoints[element.teamId] || 0 }}
+      </div>
+      <div class="w-50"><b>Used</b></div>
+      <div class="w-50 pr-2 rem-point">
+        {{ element.totalPoints - (teamPoints[element.teamId] || 0) }}
+      </div>
+      <div class="w-50"><b>Remaining</b></div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -5,10 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  links = [
-    { link: '/admin/player', text: 'Player' },
-    { link: '/admin/team', text: 'Team' },
-    { link: '/admin/playerBulk', text: 'Add Players' }
-  ];
-}
+export class AppComponent {}

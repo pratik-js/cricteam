@@ -1,0 +1,25 @@
+.all-point {
+  font-size: 20px;
+  color: #01579b;
+}
+.total-point,
+.used-point,
+.rem-point {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: right;
+}
+.total-point {
+  color: #e65100;
+}
+
+.used-point {
+  color: #d32f2f;
+}
+.rem-point {
+  color: #2e7d32;
+}
+
+.current-team {
+  background-color: yellow;
+}

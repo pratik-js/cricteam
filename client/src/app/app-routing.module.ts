@@ -6,6 +6,8 @@ import { TeamComponent } from './pages/team/team.component';
 import { PlayerBulkComponent } from './pages/player/player-bulk/player-bulk.component';
 import { TeamResolverService } from './pages/team/team-resolver.service';
 
+import { StartComponent } from './pages/start/start.component';
+
 const resolve = {
   teamData: TeamResolverService
 };
@@ -17,7 +19,7 @@ const admin = [
   },
   { path: 'team', component: TeamComponent },
   { path: 'playerBulk', component: PlayerBulkComponent },
-  { path: '', component: PlayerComponent }
+  { path: '', component: StartComponent }
 ];
 
 const routes: Routes = [
