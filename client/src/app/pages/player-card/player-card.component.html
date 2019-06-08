@@ -1,0 +1,18 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title
+      ><h2>{{ element.name }}</h2></mat-card-title
+    >
+  </mat-card-header>
+  <img
+    mat-card-image
+    class="team-card-img"
+    [src]="element.photoUrl"
+    alt="Team"
+    onerror="if (this.src != '/static/default-player.jpg') this.src = '/static/default-player.jpg';"
+  />
+
+  <mat-card-content>
+    <h4>{{ types[element.playerTypeId] }}</h4>
+  </mat-card-content>
+</mat-card>

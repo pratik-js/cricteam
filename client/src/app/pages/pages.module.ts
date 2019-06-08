@@ -12,20 +12,38 @@ import { TeamAeComponent } from './team/team-ae/team-ae.component';
 import { TeamService } from './team/team.service';
 import { PlayerBulkComponent } from './player/player-bulk/player-bulk.component';
 import { UploadPhotoComponent } from './upload-photo/upload-photo.component';
+import { AuctionComponent } from './auction/auction.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { TeamCardComponent } from './team-card/team-card.component';
+import { AdminNavigationComponent } from './admin-navigation/admin-navigation.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { PlayerCardComponent } from './player-card/player-card.component';
+import { StartComponent } from './start/start.component';
 
 const PAGES = [
   PlayerComponent,
   PageNotFoundComponent,
   TeamComponent,
-  PlayerBulkComponent
+  PlayerBulkComponent,
+  AdminHomeComponent,
+  StartComponent
 ];
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MaterialInUseModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MaterialInUseModule
+  ],
   declarations: [
     PAGES,
     PlayerAeComponent,
     TeamAeComponent,
-    UploadPhotoComponent
+    UploadPhotoComponent,
+    AuctionComponent,
+    TeamCardComponent,
+    AdminNavigationComponent,
+    PlayerCardComponent
   ],
   entryComponents: [PlayerAeComponent, TeamAeComponent, UploadPhotoComponent],
   providers: [PlayerService, TeamService],

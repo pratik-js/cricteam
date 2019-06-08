@@ -2,6 +2,11 @@ const router = require('express').Router();
 const { dataHelper, mdbHelper } = require('../../common');
 var entityName = 'player';
 
+router.get('/getPoint', (req, res) => {
+  mdbHelper.list(entityName, {}, res);
+  // mdbHelper.getGroupby(entityName, res);
+});
+
 router.post('/player-bulk', (req, res) => {
   const players = req.body.players;
   if (!players) {
@@ -38,6 +43,13 @@ router.patch('/player/:id', (req, res) => {
 
 router.get('/player', (req, res) => {
   let filter, page, limit;
+  mdbHelper.list(entityName, { filter, page, limit, sort: 'name' }, res);
+});
+
+router.get('/player-by-type/:id', (req, res) => {
+  let filter = { playerTypeId: req.params.id },
+    page,
+    limit;
   mdbHelper.list(entityName, { filter, page, limit, sort: 'name' }, res);
 });
 

@@ -1,0 +1,17 @@
+<app-admin-navigation class="d-block"></app-admin-navigation>
+<div *ngIf="playerIds; else selectData">
+  <app-admin-home [playerIds]="playerIds"> </app-admin-home>
+</div>
+<ng-template #selectData
+  ><mat-form-field>
+    <mat-select
+      placeholder="Player Type"
+      (selectionChange)="loadPlayers($event)"
+    >
+      <mat-option [value]="0"> {{ 'Select' }} </mat-option>
+      <mat-option *ngFor="let item of playerTypes" [value]="item.value">
+        {{ item.text }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-template>
